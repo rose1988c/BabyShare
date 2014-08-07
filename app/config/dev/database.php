@@ -5,7 +5,7 @@ return array (
             'driver' => 'mysql',
             'host' => 'localhost',
             'port' => 3306,
-            'database' => 'mcc_manage',
+            'database' => 'babyshare',
             'username' => 'root',
             'password' => '',
             'charset' => 'utf8',
