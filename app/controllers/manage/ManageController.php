@@ -8,12 +8,13 @@
  * @logs: 
  *       
  */
+namespace Controllers\Manage;
 class ManageController extends BaseController
 {
     protected $layout = 'layouts.manage';
     public function index()
     {
         $this->layout->with('title', '后台管理');
-        $this->layout->content = View::make('manage.index');
+        $this->layout->content = \View::make('manage.index');
     }
 }

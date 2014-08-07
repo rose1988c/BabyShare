@@ -1,5 +1,5 @@
 <?php
-
+namespace Controllers\Manage;
 class RemindersController extends Controller {
 
 	/**

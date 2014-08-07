@@ -8,6 +8,7 @@
  * @logs: 
  *       
  */
+namespace Controllers\Manage;
 class UserController extends BaseController
 {
     protected $layout = 'layouts.manage';

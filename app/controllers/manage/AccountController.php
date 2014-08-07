@@ -8,6 +8,7 @@
  * @logs: 
  *       
  */
+namespace Controllers\Manage;
 class AccountController extends BaseController
 {
     protected $layout = 'layouts.account';

@@ -1,5 +1,5 @@
 <?php
-
+namespace Controllers\Manage;
 class RolesController extends \BaseController
 {
     

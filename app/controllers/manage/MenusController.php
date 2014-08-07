@@ -1,4 +1,5 @@
 <?php
+namespace Controllers\Manage;
 class MenusController extends \BaseController
 {
     

@@ -18,19 +18,19 @@ Route::any('/logwait',  'AccountController@logwait');
 Route::group(array('prefix' => 'manage', 'before' => 'auth.manage'),function() {
     
     // 后台首页
-    Route::get('/', array('as'=>'manage','uses' => 'ManageController@index'));
+    Route::get('/', 'Controllers\Manage\ManageController@index');
 
     // 用户管理
     Route::group(array('prefix' => 'user'),function() {
-        Route::get('list/ajax', 'UserController@userList_ajax');
+        Route::get('list/ajax', 'Controllers\Manage\UserController@userList_ajax');
     });
-    Route::resource('user', 'UserController');
+    Route::resource('user', 'Controllers\Manage\UserController');
     
     // 菜单管理
-    Route::resource('menus', 'MenusController');
+    Route::resource('menus', 'Controllers\Manage\MenusController');
     
     // 角色管理
-    Route::resource('roles', 'RolesController');
+    Route::resource('roles', 'Controllers\Manage\RolesController');
     
 });
 
