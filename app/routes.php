@@ -32,6 +32,11 @@ Route::group(array('namespace' => 'App\Controllers\Manage', 'prefix' => 'manage'
     // 角色管理
     Route::resource('roles', 'RolesController');
     
+    // baby
+    Route::resource('baby', 'BabyController');
+    
+    // baby photo
+    Route::resource('photo', 'PhotoController');
 });
 
 //------------------------------- 本地使用 -------------------------------
