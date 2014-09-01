@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 class PhotoTable extends Migration
 {
     
-    protected $table_name = 'photo';
+    protected $table_name = 'baby_photo';
 
     /**
      * Run the migrations.
@@ -18,6 +18,7 @@ class PhotoTable extends Migration
         Schema::create($this->table_name, function ($table)
         {
             $table->increments('id');
+            $table->integer('bid')->unsigned();
             $table->string('title', 100)->default('');
             $table->string('desc', 255)->default('');
             $table->string('path', 255)->default('');

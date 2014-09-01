@@ -1,16 +1,16 @@
-<?php
+<?php 
 /**
- * BabyModel.php
+ * PhotoModel.php
  * 
  * @author: Cyw
  * @email: chenyunwen01@bianfeng.com
- * @created: 2014-9-1 下午4:16:39
+ * @created: 2014-9-1 下午6:03:20
  * @logs: 
  *       
  */
-class BabyModel extends Eloquent
+class PhotoModel extends Eloquent
 {
-    protected $table = 'baby_info';
+    protected $table = 'baby_photo';
     protected $fillable = array();
     protected $guarded  = array();
     protected $softDelete = true;

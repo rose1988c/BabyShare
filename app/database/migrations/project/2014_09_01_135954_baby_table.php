@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 class BabyTable extends Migration
 {
     
-    protected $table_name = 'baby';
+    protected $table_name = 'baby_info';
 
     /**
      * Run the migrations.

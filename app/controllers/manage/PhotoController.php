@@ -12,12 +12,14 @@ namespace App\Controllers\Manage;
 
 use BaseController;
 use View;
+use \PhotoModel;
 use \BabyModel;
 use Input;
 
 class PhotoController extends BaseController
 {
     protected $layout = 'layouts.manage';
+    private $resourceUrl = 'manage/photo/';
     
     // restfull
     /**
@@ -28,9 +30,11 @@ class PhotoController extends BaseController
      */
     public function index()
     {
-        $babys = BabyModel::all()->toArray();
-        $this->layout->with('title', '宝宝列表');
-        $this->layout->content = View::make('manage.baby.index')->with(compact('babys'));
+        View::share('resourceUrl', $this->resourceUrl);
+        
+        $photos = PhotoModel::all()->toArray();
+        $this->layout->with('title', '列表');
+        $this->layout->content = View::make( $this->resourceUrl . 'index' )->with(compact('photos'));
     }
 
     /**
@@ -41,7 +45,9 @@ class PhotoController extends BaseController
      */
     public function create()
     {
-        return View::make('manage.baby.create');
+        $babys = BabyModel::all()->lists('nickname', 'id');
+        
+        return View::make($this->resourceUrl . 'create')->with(compact('babys'));
     }
 
     /**
@@ -53,7 +59,7 @@ class PhotoController extends BaseController
     public function store()
     {
         if (is_super_admin()){
-            $res = BabyModel::create(Input::all());
+            $res = PhotoModel::create(Input::all());
             $code = is_object($res) ? 0 : 1;
             return $this->toJson('创建成功!', $code);
         } else {
@@ -81,9 +87,9 @@ class PhotoController extends BaseController
      */
     public function edit($id)
     {
-        $baby = BabyModel::find($id)->toArray();
+        $photo = PhotoModel::find($id)->toArray();
         
-        return View::make('manage.baby.edit')->with(compact('baby'));
+        return View::make('manage.photo.edit')->with(compact('photo'));
     }
 
     /**
@@ -96,7 +102,7 @@ class PhotoController extends BaseController
     public function update($id)
     {
         if(is_super_admin()) {
-            $res = BabyModel::where('id', $id)->update(Input::all());
+            $res = PhotoModel::where('id', $id)->update(Input::all());
             $code = $res > 0 ? 0 : 1;
             return $this->toJson('更新成功!', $code);
         } else {
@@ -114,7 +120,7 @@ class PhotoController extends BaseController
     public function destroy($id)
     {
         if(is_super_admin()) {
-            $res = BabyModel::where('id', $id)->first();
+            $res = PhotoModel::where('id', $id)->first();
             $res = $res->forceDelete();
             $code = $res > 0 ? 0 : 1;
             return $this->toJson('删除成功!', $code);
