@@ -15,22 +15,22 @@ Route::get('/logout', 'AccountController@logout');
 Route::any('/logwait',  'AccountController@logwait');
 
 //------------------------------- 后台管理 -------------------------------
-Route::group(array('prefix' => 'manage', 'before' => 'auth.manage'),function() {
-    
+Route::group(array('namespace' => 'App\Controllers\Manage', 'prefix' => 'manage', 'before' => 'auth.manage'),function() {
+        
     // 后台首页
-    Route::get('/', 'Controllers\Manage\ManageController@index');
+    Route::get('/', 'ManageController@index');
 
     // 用户管理
     Route::group(array('prefix' => 'user'),function() {
-        Route::get('list/ajax', 'Controllers\Manage\UserController@userList_ajax');
+        Route::get('list/ajax', 'UserController@userList_ajax');
     });
-    Route::resource('user', 'Controllers\Manage\UserController');
+    Route::resource('user', 'UserController');
     
     // 菜单管理
-    Route::resource('menus', 'Controllers\Manage\MenusController');
+    Route::resource('menus', 'MenusController');
     
     // 角色管理
-    Route::resource('roles', 'Controllers\Manage\RolesController');
+    Route::resource('roles', 'RolesController');
     
 });
 

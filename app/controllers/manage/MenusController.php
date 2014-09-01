@@ -1,5 +1,12 @@
 <?php
-namespace Controllers\Manage;
+namespace App\Controllers\Manage;
+use BaseController;
+use View;
+use MenuModel;
+use Datatables;
+use Cache;
+use Input;
+
 class MenusController extends \BaseController
 {
     

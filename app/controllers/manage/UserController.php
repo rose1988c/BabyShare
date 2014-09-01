@@ -8,7 +8,13 @@
  * @logs: 
  *       
  */
-namespace Controllers\Manage;
+namespace App\Controllers\Manage;
+use BaseController;
+use View;
+use UserModel;
+use Datatables;
+use Input;
+
 class UserController extends BaseController
 {
     protected $layout = 'layouts.manage';

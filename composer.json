@@ -1,14 +1,14 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
-	"keywords": ["framework", "laravel"],
-	"license": "MIT",
-	"require": {
-		"laravel/framework": "4.1.*",
-		"barryvdh/laravel-ide-helper": "1.*",
-		"bllim/datatables": "*",
-        "way/generators": "2.*",
-        "guzzlehttp/guzzle": "~4.0"
+  "name": "laravel/laravel",
+  "description": "The Laravel Framework.",
+  "keywords": ["framework", "laravel"],
+  "license": "MIT",
+  "require": {
+    "laravel/framework": "4.2.*",
+    "barryvdh/laravel-ide-helper": "1.*",
+    "bllim/datatables": "*",
+    "way/generators": "2.*",
+    "guzzlehttp/guzzle": "~4.0"
 	},
 	"autoload": {
 		"classmap": [

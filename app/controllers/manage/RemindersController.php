@@ -1,5 +1,10 @@
 <?php
-namespace Controllers\Manage;
+namespace App\Controllers\Manage;
+use BaseController;
+use View;
+use Password;
+use Redirect;
+
 class RemindersController extends Controller {
 
 	/**

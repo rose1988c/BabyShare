@@ -1,5 +1,12 @@
 <?php
-namespace Controllers\Manage;
+namespace App\Controllers\Manage;
+use BaseController;
+use View;
+use Datatables;
+use RoleModel;
+use MenuModel;
+use Input;
+
 class RolesController extends \BaseController
 {
     
@@ -57,7 +64,7 @@ class RolesController extends \BaseController
      */
     public function show($id) {
         // 当前用户可赋予的权限
-        $userMids = Service\Repository\UserRepository::getAuthMenus();
+        $userMids = \Service\Repository\UserRepository::getAuthMenus();
         
         // 角色
         $role = RoleModel::find($id)->toArray();
