@@ -39,6 +39,7 @@
             	<td>
                 @if (is_super_admin())
                 <a href="{{url('manage/baby/' . $baby['id'], 'edit')}}" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil"></i></a>
+                <a href="{{url( 'manage/photo/create?bid=' . $baby['id'])}}" data-toggle="modal" data-target="#addPhotoModal"><i class="glyphicon glyphicon-th-large"></i>上传</a>
                 <a href="#deleteModal" rel="{{$baby['id']}}" title="{{$baby['name']}}" data-toggle="modal" data-target="#deleteModal" class="delete-row"><i class="fa fa-trash-o"></i></a>
                 @endif
               </td>
@@ -84,6 +85,15 @@
   </div>
 </div>
 
+<!-- addModal -->
+<div class="modal fade" id="addPhotoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+
 <!-- authModal -->
 <div class="modal fade" id="authModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog">
@@ -101,6 +111,10 @@
 @section('footer')
 <script src="{{asset('/assets/package/datatables/js/jquery.dataTables.js')}}"></script>
 <script src="{{asset('/assets/bracket/js/chosen.jquery.min.js')}}"></script>
+
+{{ HTML::style('/assets/package/dropzone/css/basic.css') }}
+{{ HTML::style('/assets/package/dropzone/css/dropzone.css') }}
+{{ HTML::script('/assets/package/dropzone/dropzone.js') }}
 
 <script type="text/javascript">
   $(document).ready(function() {

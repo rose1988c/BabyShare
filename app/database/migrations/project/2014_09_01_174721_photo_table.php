@@ -21,6 +21,8 @@ class PhotoTable extends Migration
             $table->integer('bid')->unsigned();
             $table->string('title', 100)->default('');
             $table->string('desc', 255)->default('');
+            $table->integer('file_size')->unsigned();
+            $table->string('file_name', 255)->default('');
             $table->string('path', 255)->default('');
             $table->dateTime('take_at')->default('0000-00-00 00:00:00');
             $table->softDeletes();

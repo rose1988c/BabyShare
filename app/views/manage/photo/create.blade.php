@@ -1,4 +1,3 @@
-<form class="form-horizontal">
     <div class="modal-header">
     	<button type="button" class="close" data-dismiss="modal">
     		<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
@@ -6,70 +5,83 @@
     	<h4 class="modal-title" id="myModalLabel">添加</h4>
     </div>
     <div class="modal-body">
-    		<div class="form-group">
-    			<label class="col-sm-4 control-label">宝宝:</label>
-    			<div class="col-sm-6">
-    			    <?php 
-    			        echo \Service\Common\Html::select('bid', 'bid', $babys, null, false, 'form-control');?>
-    			</div>
-    		</div>
-    		<div class="form-group">
-    			<label class="col-sm-4 control-label">标题:</label>
-    			<div class="col-sm-6">
-    			    <input type="text" name="title" value="" class="form-control" required />
-    			</div>
-    		</div>
-    		<div class="form-group">
-    			<label class="col-sm-4 control-label">描述:</label>
-    			<div class="col-sm-6">
-    			    <textarea type="text" name="desc" value="" class="form-control" required ></textarea>
-    			</div>
-    		</div>
-    		<div class="form-group">
-    			<label class="col-sm-4 control-label">拍照时间:</label>
-    			<div class="col-sm-6">
-    			    <input type="datetime-local" name="take_at" value="" class="form-control" required />
-    			</div>
-    		</div>
-    		<div class="form-group">
-    			<label class="col-sm-4 control-label">上传照片:</label>
-    			<div class="col-sm-6">
-    			    <input type="text" name="path" value="" class="form-control" required />
-    			    
-    			    <form method="post" action="http://upload.qiniu.com/"
-                 enctype="multipart/form-data">
-                  <input name="key" type="hidden" value="<resource_key>">
-                  <input name="x:<custom_name>" type="hidden" value="<custom_value>">
-                  <input name="token" type="hidden" value="<upload_token>">
-                  <input name="file" type="file" />
-              </form>
-    			</div>
-    		</div>
+        <div style="min-height: 300px; height: auto; border:1px solid slategray;" id="dropzone">
+        {{ Form::open(array('url' => 'manage/photo/upload/1', 'class'=>'dropzone', 'id'=>'my-dropzone')) }}
+        <!-- Single file upload
+        <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
+        -->
+        <!-- Multiple file upload-->
+        <div class="fallback">
+            <input name="file" type="file" multiple/>
+        </div>
+        <br>
+        <br>
+        {{ Form::close() }}
+        </div>
     </div>
     <div class="modal-footer">
-    	<button type="button" class="btn btn-primary modelAdd" data-dismiss="modal">确定</button>
+    	<button type="submit" class="btn btn-primary modelAdd " data-dismiss="modal">确定</button>
     	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
     </div>
-</form>
 
 <script>
     $(document).ready(function(){
-        $(".modelAdd").click(function(){
-            var thiz = $(this);
-            var url = "{{url('manage/photo')}}";
-            $.ajax({
-                url : url,
-                data : thiz.closest('form').serialize(),
-                dataType : 'json',
-                type : 'POST'
-            }).done(function(data){
-                if (data.code == 0) {
-                  notify('提示', data.message, 'success', false, 3);
-                  window.location.reload();
-                } else {
-                  notify('提示', data.message, 'danger');
-                }
-            }).fail(function(){ alert("出错啦！"); });
-        });
+    	// myDropzone is the configuration for the element that has an id attribute
+        // with the value my-dropzone (or myDropzone)
+        Dropzone.options.myDropzone = {
+            init: function () {
+                this.on("addedfile", function (file) {
+
+                    var removeButton = Dropzone.createElement('<a class="dz-remove">Remove file</a>');
+                    var _this = this;
+
+                    removeButton.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        var fileInfo = new Array();
+                        fileInfo['name'] = file.name;
+
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ url('manage/photo/delete-image') }}",
+                            data: {file: "<?php echo date('Ymd_'); ?>" + file.name},
+                            success: function (response) {
+
+                                if (response == 'success') {
+
+                                    //alert('deleted');
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+
+                        _this.removeFile(file);
+
+                        // If you want to the delete the file on the server as well,
+                        // you can do the AJAX request here.
+                    });
+
+                    // Add the button to the file preview element.
+                    file.previewElement.appendChild(removeButton);
+                });
+            }
+        };
+
+        var myDropzone = new Dropzone("#dropzone .dropzone");
+        Dropzone.options.myDropzone = false;
+
+//         // Create the mock file:
+//         var mockFile = { name: " ", size: " " };
+
+//         // Call the default addedfile event handler
+//         myDropzone.emit("addedfile", mockFile);
+
+//         // And optionally show the thumbnail of the file:
+//         myDropzone.emit("thumbnail", mockFile, " ");
+
+        
     });
 </script>

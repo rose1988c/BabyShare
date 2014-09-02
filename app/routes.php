@@ -37,6 +37,8 @@ Route::group(array('namespace' => 'App\Controllers\Manage', 'prefix' => 'manage'
     
     // baby photo
     Route::resource('photo', 'PhotoController');
+    Route::post('photo/upload/{bid}', 'PhotoController@upload');
+    Route::post('photo/delete-image', 'PhotoController@deleteImage');
 });
 
 //------------------------------- 本地使用 -------------------------------

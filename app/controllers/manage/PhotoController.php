@@ -12,14 +12,26 @@ namespace App\Controllers\Manage;
 
 use BaseController;
 use View;
-use \PhotoModel;
-use \BabyModel;
+use PhotoModel;
+use BabyModel;
 use Input;
+use Response;
 
 class PhotoController extends BaseController
 {
     protected $layout = 'layouts.manage';
     private $resourceUrl = 'manage/photo/';
+    
+    protected $qiniu;
+    
+    public function __construct()
+    {
+        $this->qiniu = \Qiniu\Qiniu::create(array(
+            'access_key' => \Config::get('qiniu.ak'),
+            'secret_key' => \Config::get('qiniu.sk'),
+            'bucket'     => \Config::get('qiniu.bk'),
+        ));
+    }
     
     // restfull
     /**
@@ -66,7 +78,81 @@ class PhotoController extends BaseController
             return $this->toJson('您没有权限!', 1);
         }
     }
-
+    
+    /**
+     * 上传图片
+     * 
+     * @param unknown $bid
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function upload($bid)
+    {
+        $file = Input::file('file');
+        
+        //验证
+        $rules = array('file' => 'mimes:jpg,jpeg,png|max:10000');
+        $data = array('file' => Input::file('file'));
+        
+        $validation = \Validator::make($data, $rules);
+        
+        if ($validation->fails()) {
+            return Response::json($validation->errors()->first(), 400);
+        }
+        
+        // 上传路径
+        $destinationPath = public_path() . '/upload/';
+        $fileName = $file->getClientOriginalName();
+        $fileSize = $file->getClientSize();
+        
+        $file_prefix = date('Ymd_');
+        $fileName = $file_prefix . $fileName;
+        
+        // 上传
+        $upload_success = Input::file('file')->move($destinationPath, $fileName);
+        
+        if ($upload_success) {
+        
+            // 7niu
+            $res = $this->qiniu->uploadFile(sprintf('%s/%s', $destinationPath, $fileName), $fileName);
+            // 7niu end
+            
+            \File::delete($destinationPath . $fileName);
+        
+            $image = new PhotoModel;
+            $image->bid = $bid;
+            $image->title = explode(".", $fileName)[0];
+            $image->file_name = $fileName;
+            $image->file_size = $fileSize;
+            $image->path = $fileName;
+            $image->take_at = new \DateTime();
+            $image->save();
+        
+            return Response::json('success', 200);
+        }
+        
+        return Response::json('error', 400);
+    }
+    
+    /**
+     * 删除图片
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deleteImage()
+    {
+        $fileName = Input::get('file');
+        PhotoModel::where('file_name', '=', $fileName)->delete();
+        $destinationPath = public_path() . '/upload/';
+        \File::delete($destinationPath . $fileName);
+        
+        // 7niu
+        $this->qiniu->delete($fileName);
+        // 7niu end
+        
+        return Response::json('success', 200);
+    }
+    
+    
     /**
      * Display the specified resource.
      * GET /user/{id}

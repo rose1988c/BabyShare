@@ -1,8 +1,12 @@
 @section('content')
 
+<?php 
+/*
 <p>
     <a class="btn btn-primary" href="{{url( $resourceUrl . 'create')}}" data-toggle="modal" data-target="#addModal">添加</a>
 </p>
+ * */
+?>
 
 <!-- 普通方式，数据量小的情况 -->
 <div class="table-responsive">
@@ -31,7 +35,7 @@
             	<td>
                 @if (is_super_admin())
                 <a href="{{url('manage/photo/' . $photo['id'], 'edit')}}" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil"></i></a>
-                <a href="#deleteModal" rel="{{$photo['id']}}" title="{{$photo['name']}}" data-toggle="modal" data-target="#deleteModal" class="delete-row"><i class="fa fa-trash-o"></i></a>
+                <a href="#deleteModal" rel="{{$photo['id']}}" title="{{$photo['title']}}" data-toggle="modal" data-target="#deleteModal" class="delete-row"><i class="fa fa-trash-o"></i></a>
                 @endif
               </td>
               @endif
