@@ -1,3 +1,4 @@
+<form class="form-horizontal">
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal">
 		<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
@@ -5,7 +6,6 @@
 	<h4 class="modal-title" id="myModalLabel">编辑</h4>
 </div>
 <div class="modal-body">
-	<form class="form-horizontal">
 		<div class="form-group">
     			<label class="col-sm-4 control-label">姓名:</label>
     			<div class="col-sm-6">
@@ -63,14 +63,12 @@
     			    <input type="text" name="birth_address" value="{{$baby['birth_address']}}" class="form-control" />
     			</div>
     		</div>
-		
-		
-	</form>
 </div>
 <div class="modal-footer">
 	<button type="button" class="btn btn-primary modelEdit" data-dismiss="modal">确定</button>
 	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 </div>
+</form>
 
 <script>
     $(document).ready(function(){

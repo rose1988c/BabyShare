@@ -32,7 +32,7 @@
             init: function () {
                 this.on("addedfile", function (file) {
 
-                    var removeButton = Dropzone.createElement('<a class="dz-remove">Remove file</a>');
+                    var removeButton = Dropzone.createElement('<a class="dz-remove">删除</a>');
                     var _this = this;
 
                     removeButton.addEventListener("click", function (e) {

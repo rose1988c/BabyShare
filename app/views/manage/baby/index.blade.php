@@ -39,7 +39,7 @@
             	<td>
                 @if (is_super_admin())
                 <a href="{{url('manage/baby/' . $baby['id'], 'edit')}}" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil"></i></a>
-                <a href="{{url( 'manage/photo/create?bid=' . $baby['id'])}}" data-toggle="modal" data-target="#addPhotoModal"><i class="glyphicon glyphicon-th-large"></i>上传</a>
+                <a href="{{url( 'manage/photo/create?bid=' . $baby['id'])}}" data-toggle="modal" data-target="#addPhotoModal"><i class="glyphicon glyphicon-th-large"></i></a>
                 <a href="#deleteModal" rel="{{$baby['id']}}" title="{{$baby['name']}}" data-toggle="modal" data-target="#deleteModal" class="delete-row"><i class="fa fa-trash-o"></i></a>
                 @endif
               </td>

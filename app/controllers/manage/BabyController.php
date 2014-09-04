@@ -18,6 +18,7 @@ use Input;
 
 class BabyController extends BaseController
 {
+
     protected $layout = 'layouts.manage';
     
     // restfull
@@ -53,7 +54,7 @@ class BabyController extends BaseController
      */
     public function store()
     {
-        if (is_super_admin()){
+        if (is_super_admin()) {
             $res = BabyModel::create(Input::all());
             $code = is_object($res) ? 0 : 1;
             return $this->toJson('创建成功!', $code);
@@ -70,8 +71,7 @@ class BabyController extends BaseController
      * @return Response
      */
     public function show($id)
-    {
-    }
+    {}
 
     /**
      * Show the form for editing the specified resource.
@@ -96,7 +96,7 @@ class BabyController extends BaseController
      */
     public function update($id)
     {
-        if(is_super_admin()) {
+        if (is_super_admin()) {
             $res = BabyModel::where('id', $id)->update(Input::all());
             $code = $res > 0 ? 0 : 1;
             return $this->toJson('更新成功!', $code);
@@ -114,7 +114,7 @@ class BabyController extends BaseController
      */
     public function destroy($id)
     {
-        if(is_super_admin()) {
+        if (is_super_admin()) {
             $res = BabyModel::where('id', $id)->first();
             $res = $res->forceDelete();
             $code = $res > 0 ? 0 : 1;

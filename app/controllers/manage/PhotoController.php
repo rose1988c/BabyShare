@@ -45,8 +45,10 @@ class PhotoController extends BaseController
         View::share('resourceUrl', $this->resourceUrl);
         
         $photos = PhotoModel::all()->toArray();
+        $babys = \BabyModel::all()->lists('name', 'id');
+        
         $this->layout->with('title', '列表');
-        $this->layout->content = View::make( $this->resourceUrl . 'index' )->with(compact('photos'));
+        $this->layout->content = View::make( $this->resourceUrl . 'index' )->with(compact('photos', 'babys'));
     }
 
     /**
@@ -175,7 +177,9 @@ class PhotoController extends BaseController
     {
         $photo = PhotoModel::find($id)->toArray();
         
-        return View::make('manage.photo.edit')->with(compact('photo'));
+        $photoInfo = $this->qiniu->stat($photo['path'])->data;
+        
+        return View::make('manage.photo.edit')->with(compact('photo', 'photoInfo'));
     }
 
     /**

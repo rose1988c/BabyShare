@@ -14,6 +14,7 @@
       <thead>
          <tr>
             <th>id</th>
+            <th>宝宝</th>
             <th>名称</th>
             <th>描述</th>
             <th>照片</th>
@@ -27,9 +28,10 @@
             <?php foreach ((array)$photos as $photo) { ?>
             <tr>
             	<td>{{$photo['id']}}</td>
+            	<td>{{$babys[$photo['bid']]}}</td>
             	<td>{{$photo['title']}}</td>
             	<td>{{$photo['desc']}}</td>
-            	<td>{{$photo['path']}}</td>
+            	<td><img alt="{{$photo['title']}}" src="{{QiniuImageViewUrl($photo['path'], array(1, 'w', 100))}}"></td>
             	<td>{{$photo['take_at']}}</td>
             	@if (is_admin())
             	<td>
@@ -98,6 +100,10 @@
 <script src="{{asset('/assets/package/datatables/js/jquery.dataTables.js')}}"></script>
 <script src="{{asset('/assets/bracket/js/chosen.jquery.min.js')}}"></script>
 
+{{ HTML::style('/assets/package/dropzone/css/basic.css') }}
+{{ HTML::style('/assets/package/dropzone/css/dropzone.css') }}
+{{ HTML::script('/assets/package/dropzone/dropzone.js') }}
+
 <script type="text/javascript">
   $(document).ready(function() {
     $('#table2').dataTable({
@@ -117,7 +123,7 @@
 
       	    $("#deleteModal .modal-footer .btn-primary").off('click').on('click', function(){
 
-      	    var deleteurl = "{{url($resourceUrl)}}" + $this.attr('rel');
+      	    var deleteurl = "{{url($resourceUrl)}}" + "/" + $this.attr('rel');
       	        $.ajax({
       	    	  url: deleteurl,
         	    	dataType: 'json',
