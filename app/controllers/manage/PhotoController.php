@@ -211,7 +211,12 @@ class PhotoController extends BaseController
     {
         if(is_super_admin()) {
             $res = PhotoModel::where('id', $id)->first();
-            $res = $res->forceDelete();
+            
+            // 7niu
+            $this->qiniu->delete($res->file_name);
+            // 7niu end
+            
+            $res = $res->delete();
             $code = $res > 0 ? 0 : 1;
             return $this->toJson('删除成功!', $code);
         } else {

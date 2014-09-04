@@ -6,7 +6,13 @@
  * @version 1.0
  * @date 2014-6-29 下午5:05:13
  */
-Route::get('/', array('as'=>'index', 'uses' => 'HomeController@index'));
+Route::get('/', array(
+    'as'=>'index', 
+    'uses' => 'HomeController@index',
+    'before' => 'cache.fetch', 
+    'after' => 'cache.put'
+));
+
 
 //------------------------------- 登录 -------------------------------
 Route::any('/login',  array('as'=>'login','uses' => 'AccountController@login'));
@@ -37,9 +43,18 @@ Route::group(array('namespace' => 'App\Controllers\Manage', 'prefix' => 'manage'
     
     // baby photo
     Route::resource('photo', 'PhotoController');
-    Route::post('photo/upload/{bid}', 'PhotoController@upload');
-    Route::post('photo/delete-image', 'PhotoController@deleteImage');
+    
+    Route::group(array('after' => 'cache.flush'), function () {
+        Route::post('photo/upload/{bid}', 'PhotoController@upload');
+        Route::post('photo/delete-image', 'PhotoController@deleteImage');
+    });
 });
+
+// 首页
+Route::group(array('before' => 'auth.manage'), function () {
+    Route::get('/baby', 'BabyController@index');
+});
+        
 
 //------------------------------- 本地使用 -------------------------------
 Route::group(array('before' => 'dev'), function()

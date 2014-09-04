@@ -14,7 +14,12 @@ function gratavarUrl($email)
  * 
  * @return string
  */
-function QiniuImageViewUrl($key, array $options)
+function QiniuImageViewUrl($key, array $options = array())
 {
-    return Config::get('qiniu.url') . $key . '?imageView/' . join('/', $options);
+    if (empty($options))
+    {
+        return Config::get('qiniu.url') . $key;
+    } else {
+        return Config::get('qiniu.url') . $key . '?imageView/' . join('/', $options);
+    }
 }

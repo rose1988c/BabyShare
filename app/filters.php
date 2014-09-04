@@ -106,3 +106,7 @@ Route::filter('dev', function()
 {
     if (app()->environment() != 'dev') return Redirect::to(route('index'));
 });
+
+Route::filter('cache.fetch', 'Service\Filters\CacheFilter@fetch');
+Route::filter('cache.put', 'Service\Filters\CacheFilter@put');
+Route::filter('cache.delete', 'Service\Filters\CacheFilter@delete');

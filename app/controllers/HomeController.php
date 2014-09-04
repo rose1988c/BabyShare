@@ -5,7 +5,10 @@ class HomeController extends BaseController
     
     public function index()
     {
+        $photos = PhotoModel::all()->toArray();
+        $babys = BabyModel::all()->lists('nickname', 'id');
+        
         $this->layout->with('title', 'index');
-        $this->layout->content = View::make('index');
+        $this->layout->content = View::make('index')->with(compact('photos', 'babys'));
     }
 }
