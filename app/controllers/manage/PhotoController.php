@@ -61,7 +61,9 @@ class PhotoController extends BaseController
     {
         $babys = BabyModel::all()->lists('nickname', 'id');
         
-        return View::make($this->resourceUrl . 'create')->with(compact('babys'));
+        $bid = Input::get('bid');
+        
+        return View::make($this->resourceUrl . 'create')->with(compact('babys', 'bid'));
     }
 
     /**

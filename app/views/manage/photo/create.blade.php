@@ -6,7 +6,7 @@
     </div>
     <div class="modal-body">
         <div style="min-height: 300px; height: auto; border:1px solid slategray;" id="dropzone">
-        {{ Form::open(array('url' => 'manage/photo/upload/1', 'class'=>'dropzone', 'id'=>'my-dropzone')) }}
+        {{ Form::open(array('url' => 'manage/photo/upload/' . $bid, 'class'=>'dropzone', 'id'=>'my-dropzone')) }}
         <!-- Single file upload
         <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
         -->

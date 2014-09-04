@@ -110,3 +110,4 @@ Route::filter('dev', function()
 Route::filter('cache.fetch', 'Service\Filters\CacheFilter@fetch');
 Route::filter('cache.put', 'Service\Filters\CacheFilter@put');
 Route::filter('cache.delete', 'Service\Filters\CacheFilter@delete');
+Route::filter('cache.flush', 'Service\Filters\CacheFilter@flush');

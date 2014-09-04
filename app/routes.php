@@ -13,6 +13,10 @@ Route::get('/', array(
     'after' => 'cache.put'
 ));
 
+Route::get('/flush', array('before' => 'cache.flush', 'uses' => function(){
+    return Redirect::intended('/');
+}));
+
 
 //------------------------------- 登录 -------------------------------
 Route::any('/login',  array('as'=>'login','uses' => 'AccountController@login'));
