@@ -62,6 +62,16 @@
 						<li><a href="/login">登录</a></li>
 						<li><a href="/signup">注册</a></li>
 						@else
+						<li>
+    				        <a href="{{url('baby/create')}}" data-toggle="modal" data-target="#addBaby">添加宝宝</a>
+    					</li>
+    					
+    					@if (Session::get('mybaby'))
+    					@foreach ((array)Session::get('mybaby') as $bb)
+    					<li><a href="{{url('photo/create?bid=' . $bb['id'])}}" data-toggle="modal" data-target="#addPhoto">上传[{{$bb['nickname']}}]照片</a></li>
+    					@endforeach
+    					@endif
+    					
 						<li class="dropdown">
 						    <a href="#" class="dropdown-toggle"	data-toggle="dropdown">{{Auth::user()->username}}<b class="caret"></b>
 							</a>
@@ -79,6 +89,23 @@
 
 			</div>
 		</div>
+	</section>
+	
+	<section class="Modal">
+    	<!-- addModal -->
+        <div class="modal fade" id="addBaby" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+          <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+          </div>
+        </div>
+        
+        <div class="modal fade" id="addPhoto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+          <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+          </div>
+        </div>
 	</section>
 
 	<div class="container">

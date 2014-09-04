@@ -46,7 +46,12 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-    if (Auth::guest()) return Redirect::guest('login');
+    if (Auth::guest())
+        return Redirect::guest('login');
+    
+    $mybaby = BabyModel::where('userid', Auth::user()->id)->get()->toArray();
+    
+    $mybaby and Session::put('mybaby', $mybaby);
 });
 
 Route::filter('auth.manage', function()

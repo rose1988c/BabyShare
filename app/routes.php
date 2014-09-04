@@ -56,7 +56,13 @@ Route::group(array('namespace' => 'App\Controllers\Manage', 'prefix' => 'manage'
 
 // 首页
 Route::group(array('before' => 'auth'), function () {
-    Route::get('/baby', 'BabyController@index');
+    // baby
+    Route::resource('baby', 'BabyController');
+    
+    // baby photo
+    Route::resource('photo', 'PhotoController');
+    Route::post('photo/upload/{bid}', 'PhotoController@upload');
+    Route::post('photo/delete-image', 'PhotoController@deleteImage');
 });
         
 

@@ -18,6 +18,7 @@ class BabyTable extends Migration
         Schema::create($this->table_name, function ($table)
         {
             $table->increments('id');
+            $table->integer('userid')->unsigned();
             $table->string('nickname', 100)->default('');
             $table->string('name', 100)->default('');
             $table->string('sex', 2)->default('m');
