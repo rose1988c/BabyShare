@@ -9,8 +9,8 @@
 Route::get('/', array(
     'as'=>'index', 
     'uses' => 'HomeController@index',
-    'before' => 'cache.fetch', 
-    'after' => 'cache.put'
+    //'before' => 'cache.fetch', 
+    //'after' => 'cache.put'
 ));
 
 Route::get('/flush', array('before' => 'cache.flush', 'uses' => function(){
@@ -55,7 +55,7 @@ Route::group(array('namespace' => 'App\Controllers\Manage', 'prefix' => 'manage'
 });
 
 // 首页
-Route::group(array('before' => 'auth.manage'), function () {
+Route::group(array('before' => 'auth'), function () {
     Route::get('/baby', 'BabyController@index');
 });
         
