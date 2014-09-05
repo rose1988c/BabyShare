@@ -1,4 +1,4 @@
-<form class="form-horizontal">
+<form class="form-horizontal" method="post" action="{{url('baby')}}">
     <div class="modal-header">
     	<button type="button" class="close" data-dismiss="modal">
     		<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
@@ -57,29 +57,37 @@
     		</div>
     </div>
     <div class="modal-footer">
-    	<button type="button" class="btn btn-primary modelAdd" data-dismiss="modal">确定</button>
+    	<button type="submit" class="btn btn-primary modelAdd">确定</button>
     	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
     </div>
 </form>
 
 <script>
     $(document).ready(function(){
-        $(".modelAdd").click(function(){
-            var thiz = $(this);
+        $(".xmodelAdd").click(function(){
+            var $this = $(this);
             var url = "{{url('baby')}}";
-            $.ajax({
-                url : url,
-                data : thiz.closest('form').serialize(),
-                dataType : 'json',
-                type : 'POST'
-            }).done(function(data){
-                if (data.code == 0) {
-                  notify('提示', data.message, 'success', false, 3);
-                  window.location.reload();
-                } else {
-                  notify('提示', data.message, 'danger');
-                }
-            }).fail(function(){ alert("出错啦！"); });
+
+            if(!$this.data('sending')) {
+                $this.data('sending', true).off('click');
+                $.ajax({
+                    url : url,
+                    data : $this.closest('form').serialize(),
+                    dataType : 'json',
+                    type : 'POST'
+                }).done(function(data){
+                	  $this.data('sending', false);
+                    if (data.code == 0) {
+                      notify('提示', data.message, 'success', false, 3);
+                      window.location.reload();
+                    } else {
+                      notify('提示', data.message, 'danger');
+                    }
+                }).fail(function(){
+                	   $this.data('sending', false);
+                     alert("出错啦！"); 
+                });
+            }
         });
     });
 </script>

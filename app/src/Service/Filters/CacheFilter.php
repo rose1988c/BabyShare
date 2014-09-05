@@ -65,6 +65,7 @@ class CacheFilter {
      * @return Ambigous <mixed, \Illuminate\Cache\mixed, Closure>
      */
     public function flush() {
+        \Session::forget('mybaby');
         return  Cache::flush();;
     }
 

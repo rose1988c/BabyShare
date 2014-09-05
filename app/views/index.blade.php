@@ -14,7 +14,7 @@
     						<a href="">{{Str::limit($photo['title'], $limit = 20, $end = '')}}</a>
     					</h4>
     					<ul class="blog-meta">
-    						<li>By: <a href="">{{ $babys[ $photo['bid'] ] }}</a></li>
+    						<li>By: <a href="">{{ isset($babys[ $photo['bid']]) ? $babys[ $photo['bid']] : ''  }}</a></li>
     						<li>{{ date('Y-m-d', strtotime($photo['take_at']))}}</li>
     					</ul>
     					<div class="blog-summary">

@@ -115,8 +115,10 @@ class BabyController extends BaseController
     public function destroy($id)
     {
         if (is_super_admin()) {
-            $res = BabyModel::where('id', $id)->first();
-            $res = $res->forceDelete();
+            $res = BabyModel::where('id', '=', $id)->forceDelete();
+            
+            \PhotoModel::where('bid', $id)->forceDelete();
+            
             $code = $res > 0 ? 0 : 1;
             return $this->toJson('删除成功!', $code);
         } else {
