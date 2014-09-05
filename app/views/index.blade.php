@@ -7,7 +7,7 @@
     		<div class="col-xs-6 col-sm-4 col-md-3">
     			<div class="blog-item">
     			  <a href="" class="blog-img">
-        				<img	src="{{QiniuImageViewUrl($photo['file_name'], array(1, 'w', 263))}}" class="img-responsive" alt="">
+        				<img	src="{{QiniuImageViewUrl($photo['file_name'], array(2, 'w', 263))}}" class="img-responsive" alt="">
     			  </a>
     				<div class="blog-details">
     					<h4 class="blog-title">

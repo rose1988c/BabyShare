@@ -39,8 +39,14 @@
 				</div>
 				<div class="navbar-collapse collapse navbar-responsive-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">首页</a></li>
-						<li><a href="/baby">我的宝贝</a></li>
+						<li @if (Route::currentRouteName() == 'index')
+						    class="active"
+						    @endif
+						><a href="/">首页</a></li>
+						<li @if (Route::currentRouteName() == 'baby.index')
+						    class="active"
+						    @endif
+						><a href="/baby">我的宝贝</a></li>
 						
 						{{---
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -67,7 +73,7 @@
     					</li>
     					
     					@if (Session::get('mybaby'))
-    					@foreach ((array)Session::get('mybaby') as $bb)
+    					@foreach (Session::get('mybaby') as $bb)
     					<li><a href="{{url('photo/create?bid=' . $bb['id'])}}" data-toggle="modal" data-target="#addPhoto">上传[{{$bb['nickname']}}]照片</a></li>
     					@endforeach
     					@endif

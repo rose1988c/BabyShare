@@ -22,9 +22,15 @@ class BabyController extends BaseController
      */
     public function index()
     {
-        $babys = BabyModel::all()->toArray();
-        $this->layout->with('title', '宝宝列表');
-        $this->layout->content = View::make('baby.index')->with(compact('babys'));
+        $babys = BabyModel::whereRaw('userid = ? ', array(Auth::user()->id))->get()->toArray();
+        $bids = \Service\Common\Util::ArrayColumn($babys, 'id', 'id');
+        $babymap = \Service\Common\Util::ArrayColumn($babys, 'id', 'nickname');
+        
+        $photos = PhotoModel::whereIn('bid', array($bids))->get()->toArray();
+        
+        $this->layout->with('title', '我的宝宝');
+        $this->layout->content = View::make('baby.index')->with(compact('photos', 'babys', 'babymap'));
+        
     }
     
     /**
