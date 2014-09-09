@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Cache;
 use Str;
+use Session;
 
 /**
  * Simple route caching
@@ -65,8 +66,9 @@ class CacheFilter {
      * @return Ambigous <mixed, \Illuminate\Cache\mixed, Closure>
      */
     public function flush() {
-        \Session::forget('mybaby');
-        return  Cache::flush();;
+        Session::forget('mybaby');
+        Cache::flush();
+        return ;
     }
 
     /**
