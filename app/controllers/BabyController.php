@@ -26,7 +26,7 @@ class BabyController extends BaseController
         $bids = \Service\Common\Util::ArrayColumn($babys, 'id', 'id');
         $babymap = \Service\Common\Util::ArrayColumn($babys, 'id', 'nickname');
         
-        $photos = empty($bids) ? array() : PhotoModel::whereIn('bid', array($bids))->get()->toArray();
+        $photos = empty($bids) ? array() : PhotoModel::whereIn('bid', array($bids))->orderBy('created_at', 'desc')->get()->toArray();
         
         $this->layout->with('title', '我的宝宝');
         $this->layout->content = View::make('baby.index')->with(compact('photos', 'babys', 'babymap'));
