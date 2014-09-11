@@ -1,13 +1,4 @@
 @section('content')
-
-<?php 
-/*
-<p>
-    <a class="btn btn-primary" href="{{url( $resourceUrl . 'create')}}" data-toggle="modal" data-target="#addModal">添加</a>
-</p>
- * */
-?>
-
 <!-- 普通方式，数据量小的情况 -->
 <div class="table-responsive">
   <table class="table table-bordered table-hover" id="table2">

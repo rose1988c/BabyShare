@@ -179,7 +179,14 @@ class PhotoController extends BaseController
     {
         $photo = PhotoModel::find($id)->toArray();
         
-        $photoInfo = $this->qiniu->stat($photo['path'])->data;
+        $qiniudata = $this->qiniu->stat($photo['path'])->data;
+        
+        if (isset($qiniudata['error']) )
+        {
+            $photoInfo = array('url' => '');
+        } else {
+            $photoInfo = $qiniudata;
+        }
         
         return View::make('manage.photo.edit')->with(compact('photo', 'photoInfo'));
     }
