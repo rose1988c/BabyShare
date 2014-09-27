@@ -9,6 +9,7 @@
  * @logs: 
  *       
  */
+use \Service\Repository\PhotoRepository;
 class BabyController extends BaseController
 {
     protected $layout = 'layouts.index';
@@ -56,6 +57,8 @@ class BabyController extends BaseController
             'userid' => Auth::user()->id 
         )));
         $code = is_object($res) ? 0 : 1;
+        
+        \Service\Repository\BabyRepository::setUserBabys();
         
         return $this->toJson('创建成功!', $code);
     }

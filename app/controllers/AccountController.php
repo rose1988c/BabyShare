@@ -96,9 +96,8 @@ class AccountController extends BaseController
                     'login_at' => date('Y-m-d H:i:s', Request::server('REQUEST_TIME')),
                 ));
                 
-                //baby
-                $mybaby = BabyModel::where('userid', Auth::user()->id)->get()->toArray();
-                Session::put('mybaby', $mybaby);
+                //获取用户宝宝信息
+                \Service\Repository\BabyRepository::setUserBabys();
                 
                 return Redirect::intended('/');
             } else {

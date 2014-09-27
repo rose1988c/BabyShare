@@ -57,14 +57,14 @@
     		</div>
     </div>
     <div class="modal-footer">
-    	<button type="submit" class="btn btn-primary modelAdd">确定</button>
+    	<button type="button" class="btn btn-primary modelAdd">确定</button>
     	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
     </div>
 </form>
 
 <script>
     $(document).ready(function(){
-        $(".xmodelAdd").click(function(){
+        $(".modelAdd").click(function(){
             var $this = $(this);
             var url = "{{url('baby')}}";
 
@@ -78,8 +78,8 @@
                 }).done(function(data){
                 	  $this.data('sending', false);
                     if (data.code == 0) {
-                      notify('提示', data.message, 'success', false, 3);
-                      window.location.reload();
+                      notify('提示', data.message, 'success');
+                      setTimeout(window.location.reload(), 3000);
                     } else {
                       notify('提示', data.message, 'danger');
                     }

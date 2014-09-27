@@ -12,6 +12,7 @@
 
 {{ HTML::style('assets/simplex/css/bootstrap.min.css?' . date("Ymd", time()) . '.css') }} 
 {{ HTML::style('assets/simplex/css/base.css?' .  date("Ymd", time()) . '.css') }}
+{{ HTML::style('assets/bracket/css/jquery.gritter.css?' . date("Ymd", time()) . '.css') }}
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -137,7 +138,25 @@
 	<script src="{{asset('/assets/bracket/js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('/assets/bracket/js/retina.min.js')}}"></script>
 	<script src="{{asset('/assets/bracket/js/jquery.cookies.js')}}"></script>
+	<script src="{{asset('/assets/bracket/js/jquery.gritter.min.js')}}"></script>
 
+	
+  <script type="text/javascript">
+    function notify(title, content, class_name){
+    	var sticky = arguments[3] || false;
+    	var time = arguments[4] || '';
+    	$.gritter.add({
+    		title: title,
+    		text: content,
+        class_name: 'growl-' + class_name,
+        image: '{{asset("/assets/bracket/images/screen.png")}}',
+    		sticky: false,
+    		time: ''
+    	});
+    	return false;
+    };
+  </script>
+	
 	@yield('ext')
 </body>
 </html>

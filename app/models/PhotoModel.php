@@ -15,4 +15,9 @@ class PhotoModel extends Eloquent
     protected $guarded  = array();
     protected $softDelete = true;
     protected $hidden = array('created_at', 'updated_at', 'deleted_at');
+    
+    public function photoBaby()
+    {
+        return $this->baby = $this->belongsTo('BabyModel', 'bid');
+    }
 }
