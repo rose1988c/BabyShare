@@ -14,10 +14,11 @@ class PhotoModel extends Eloquent
     protected $fillable = array();
     protected $guarded  = array();
     protected $softDelete = true;
-    protected $hidden = array('created_at', 'updated_at', 'deleted_at');
+    protected $hidden = array('created_at', 'updated_at', 'deleted_at', 'father', 'mother', 'sex', 'birthday');
     
-    public function photoBaby()
+    public function baby()
     {
         return $this->baby = $this->belongsTo('BabyModel', 'bid');
+        //return $this->belongsTo('BabyModel', 'bid');
     }
 }

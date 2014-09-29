@@ -8,6 +8,7 @@
  * @logs: 
  *       
  */
+
 class PhotoController extends BaseController
 {
     protected $layout = 'layouts.index';
@@ -212,4 +213,5 @@ class PhotoController extends BaseController
             return $this->toJson('您没有权限!', 1);
         }
     }
+    
 }

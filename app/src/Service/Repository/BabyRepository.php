@@ -9,11 +9,14 @@
  *       
  */
 namespace Service\Repository;
+use BabyModel;
+use Auth;
+use Session;
 class BabyRepository
 {
     public static function setUserBabys()
     {
-        if (\Auth::check()){
+        if (Auth::check()){
             $mybabys = BabyModel::where('userid', Auth::user()->id)->get()->toArray();
             Session::put('mybabys', $mybabys);
         }

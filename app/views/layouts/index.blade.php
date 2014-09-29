@@ -73,11 +73,9 @@
     				        <a href="{{url('baby/create')}}" data-toggle="modal" data-target="#addBaby">添加宝宝</a>
     					</li>
     					
-    					@if (Session::get('mybaby'))
-    					@foreach (Session::get('mybaby') as $bb)
+    					@foreach ((array)Session::get('mybabys') as $bb)
     					<li><a href="{{url('photo/create?bid=' . $bb['id'])}}" data-toggle="modal" data-target="#addPhoto">上传[{{$bb['nickname']}}]照片</a></li>
     					@endforeach
-    					@endif
     					
 						<li class="dropdown">
 						    <a href="#" class="dropdown-toggle"	data-toggle="dropdown">{{Auth::user()->username}}<b class="caret"></b>
@@ -130,6 +128,9 @@
 		</div>
 		<!--end copyrights-->
 	</div>
+	
+	<!-- gototop -->
+	<div id="backtotop" class=""><div class="bttbg"></div></div>
 
 	<script src="{{asset('/assets/bracket/js/jquery-1.10.2.min.js')}}"></script>
 	<script

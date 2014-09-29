@@ -18,6 +18,7 @@
     -webkit-box-shadow: 0 3px 0 rgba(12,12,12,0.03);
     box-shadow: 0 3px 0 rgba(12,12,12,0.03);
     position: relative;
+    border: 1px solid #ccc;
 }
 
 .blog-img img {
@@ -159,4 +160,35 @@
 
 .blog-quote .quote-danger a:hover {
     background-color: #D43F3A;
+}
+
+/*to top*/
+#backtotop {
+  height: 50px;
+  position: fixed;
+  bottom: 55px;
+  right: -60px;
+  z-index: 9999;
+  -moz-transition: all 1s ease;
+  -webkit-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+#backtotop.showme {
+  right: 12px;
+  -moz-transform: scale(1) rotate(-360deg) translate(0px);
+  -webkit-transform: scale(1) rotate(-360deg) translate(0px);
+  -o-transform: scale(1) rotate(-360deg) translate(0px);
+  transform: scale(1) rotate(-360deg) translate(0px);
+}
+
+#backtotop .bttbg {
+  width: 50px;
+  height: 50px;
+  background: url(../images/top_button.png) no-repeat 0 0;
+}
+
+#backtotop .bttbg:hover {
+  background-position: left bottom;
 }
