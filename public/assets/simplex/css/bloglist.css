@@ -35,6 +35,8 @@
     font-family: 'LatoBold';
     margin: 0;
     font-weight: normal;
+	  width:230px;
+	  overflow:hidden;
 }
 
 .blog-title a {
