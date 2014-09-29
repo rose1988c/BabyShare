@@ -33,4 +33,23 @@ class ApiController extends BaseController
             'perpage' => $perpage,
         ));
     }
+    
+    public function mybabyphotos()
+    {
+        $page = Input::get('page', 1);
+        $perpage = Input::get('perpage', 20);
+        $userid = Auth::id();
+        $data = PhotoRepository::getUserPhotos($userid, $page, $perpage);
+        
+        foreach ($data as $key => $photo) {
+            $data[$key]->largeImg = QiniuImageViewUrl($photo->path);
+            $data[$key]->smallImg = QiniuImageViewUrl($photo->path, array(2, 'w', 263));
+            $data[$key]->baby = $photo->baby;
+        }
+        
+        return $this->success($data, 'success', array(
+            'page' => $page,
+            'perpage' => $perpage,
+        ));
+    }
 }
