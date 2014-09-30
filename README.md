@@ -1,3 +1,7 @@
 BabyShare
 =========
-see that , you  will find sun 
+
+宝宝分享,自动git发布
+
+
+
