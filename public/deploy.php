@@ -18,6 +18,8 @@
 		'git submodule status',
 	);
 
+	chdir('../');
+
 	// Run the commands for output
 	$output = '';
 	foreach($commands AS $command){
