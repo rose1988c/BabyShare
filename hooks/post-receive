@@ -1,0 +1,2 @@
+#!/bin/bash
+GIT_WORK_TREE=/home/shixinyi/BabyShare git checkout -f
