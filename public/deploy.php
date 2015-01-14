@@ -17,7 +17,8 @@
 		'git submodule update',
 		'git submodule status',
 	);
-
+  
+	//laravel
 	chdir('../');
 
 	// Run the commands for output
